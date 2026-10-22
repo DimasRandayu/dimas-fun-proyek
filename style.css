@@ -1,0 +1,452 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --night: #080d1c;
+    --white: #f4f0ff;
+    --muted: #aab5d0;
+    --gold: #e9d6a5;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 10%,
+        #263557 0%, #10182d 45%, #080d1c 100%);
+    color: var(--white);
+    font-family: "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
+
+/* Langit dan bintang */
+.sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    background: #fff9e8;
+    box-shadow: 0 0 5px #fff9e8;
+    animation: twinkle 2s infinite alternate;
+}
+
+/* Bulan purnama */
+.moon {
+    position: absolute;
+    width: 145px;
+    height: 145px;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle at 35% 30%,
+        #fffbe8 0%, #f8e6b6 45%,
+        #e4c68a 75%, #c7a66c 100%);
+
+    box-shadow:
+        0 0 30px #ffe8ad99,
+        0 0 70px #ffe8ad44;
+
+    animation: moonGlow 4s ease-in-out infinite alternate;
+}
+
+.moon::after {
+    display: none;
+}
+
+@keyframes moonGlow {
+    to {
+        box-shadow:
+            0 0 40px #ffe8adbb,
+            0 0 100px #ffe8ad55;
+    }
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Bintang jatuh */
+.shooting-star {
+    position: absolute;
+    top: 20%;
+    left: -120px;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(
+        90deg, transparent, white, transparent
+    );
+    transform: rotate(-25deg);
+    animation: shooting 7s linear infinite;
+}
+
+@keyframes shooting {
+    0%, 70% {
+        left: -120px;
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 110%;
+        top: 50%;
+        opacity: 0;
+    }
+}
+
+/* Konten utama */
+.container {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 36px, 650px);
+    min-height: 100vh;
+    margin: auto;
+    padding: 205px 0 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.eyebrow,
+.letter-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+h1 {
+    margin-top: 24px;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 6vw, 48px);
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+h1 span {
+    display: block;
+    color: var(--gold);
+    font-style: italic;
+}
+
+.subtitle {
+    margin-top: 16px;
+    color: var(--muted);
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Amplop digital */
+.envelope {
+    position: relative;
+    flex-shrink: 0;
+    width: 220px;
+    height: 145px;
+    margin-top: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    perspective: 700px;
+    transition: transform 0.3s;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #9b8ab9;
+    border-radius: 5px;
+}
+
+.letter-preview {
+    position: absolute;
+    z-index: 1;
+    left: 10%;
+    bottom: 8px;
+    width: 80%;
+    height: 110px;
+    padding: 18px 12px;
+    background: #fff9ed;
+    color: #313651;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    font-family: Georgia, serif;
+    font-size: 19px;
+    transition: transform 0.8s ease;
+}
+
+.letter-heart {
+    color: #b27d91;
+    text-align: right;
+    font-size: 23px;
+}
+
+.envelope-flap {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 85px solid #e4d2eb;
+
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+
+.envelope-front {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: #b8a5cd;
+
+    clip-path: polygon(
+        0 0, 50% 57%, 100% 0,
+        100% 100%, 0 100%
+    );
+
+    border-radius: 5px;
+}
+
+.seal {
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, -50%);
+
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+
+    background: #f4e4bc;
+    color: #655477;
+    border-radius: 50%;
+    transition: opacity 0.3s;
+}
+
+.hint {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Animasi membuka amplop */
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envelope.open .letter-preview {
+    transform: translateY(-70px);
+}
+
+.envelope.open .seal {
+    opacity: 0;
+}
+
+/* Kartu surat */
+.letter-content {
+    width: 100%;
+    max-width: 490px;
+    margin-top: 35px;
+    padding: 30px;
+
+    border: 1px solid #ffffff30;
+    border-radius: 18px;
+
+    background: rgba(13, 23, 45, 0.94);
+    box-shadow: 0 15px 60px #00000035;
+    text-align: left;
+
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+
+    transition: opacity 0.7s, transform 0.7s;
+}
+
+.letter-content.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+}
+
+.letter-content h2 {
+    margin: 18px 0;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.letter-content > p:not(
+    .letter-label, .signature, .surprise-message
+) {
+    margin-bottom: 17px;
+    color: #d0d6e8;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.signature {
+    margin-top: 25px;
+    color: var(--gold);
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+/* Tombol */
+.surprise-button,
+.music-button {
+    border: 1px solid #d8c89b80;
+    background: transparent;
+    color: var(--gold);
+    border-radius: 30px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.surprise-button {
+    margin-top: 25px;
+}
+
+.surprise-button:hover,
+.music-button:hover {
+    background: #ffffff12;
+    transform: translateY(-2px);
+}
+
+.surprise-button:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.surprise-message {
+    display: none;
+    margin-top: 20px;
+    color: #f4e6c4;
+    font-family: Georgia, serif;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.surprise-message.show {
+    display: block;
+    animation: appear 0.8s ease;
+}
+
+.music-button {
+    margin-top: 35px;
+    font-size: 12px;
+}
+
+.footer {
+    margin-top: 28px;
+    color: #8994af;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tampilan HP */
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - 30px);
+        padding-top: 190px;
+    }
+
+    .moon {
+        width: 115px;
+        height: 115px;
+        top: 35px;
+    }
+
+    h1 {
+        font-size: clamp(27px, 8vw, 36px);
+    }
+
+    .eyebrow {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .envelope {
+        margin-top: 40px;
+    }
+
+    .letter-content {
+        padding: 24px 20px;
+    }
+
+    .letter-content > p:not(
+        .letter-label, .signature, .surprise-message
+    ) {
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
