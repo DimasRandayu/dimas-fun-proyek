@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080d1c">
+    <title>A Little Something for You 🌕</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background langit malam -->
+    <div class="sky" id="sky">
+        <div class="moon"></div>
+        <div class="shooting-star"></div>
+    </div>
+
+    <!-- Konten utama -->
+    <main class="container">
+
+        <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+
+        <h1>
+            under the same moon,
+            <span>a little gift for you.</span>
+        </h1>
+
+        <p class="subtitle">
+            Even an ordinary day can hold something special.
+        </p>
+
+        <!-- Amplop digital -->
+        <button
+            class="envelope"
+            id="envelope"
+            type="button"
+            aria-label="Buka surat untukmu"
+            aria-expanded="false"
+            aria-controls="letter"
+        >
+            <div class="envelope-back"></div>
+
+            <div class="letter-preview">
+                <span>hey, you!</span>
+                <span class="letter-heart">♡</span>
+            </div>
+
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+
+            <span class="seal">✦</span>
+        </button>
+
+        <p class="hint" id="hint">
+            tap the envelope to open ♡
+        </p>
+
+        <!-- Isi surat -->
+        <section
+            class="letter-content"
+            id="letter"
+            aria-hidden="true"
+            inert
+        >
+            <p class="letter-label">A SMALL NOTE FOR YOU</p>
+
+            <h2>Hi, you. ♡</h2>
+
+            <p>
+                I made this little thing just for you.
+                It's nothing big, just a small gift
+                to hopefully make you smile.
+            </p>
+
+            <p>
+                I hope you always find little reasons
+                to be happy, even on the quietest days.
+                You deserve kind moments and good things.
+            </p>
+
+            <p>
+                And maybe, whenever you look at the moon,
+                you'll remember that somewhere,
+                someone wishes you well.
+            </p>
+
+            <p class="signature">
+                take care, always ♡
+            </p>
+
+            <button
+                class="surprise-button"
+                id="surpriseButton"
+                type="button"
+                aria-expanded="false"
+                aria-controls="surpriseMessage"
+            >
+                one last thing ✨
+            </button>
+
+            <p
+                class="surprise-message"
+                id="surpriseMessage"
+                aria-live="polite"
+            >
+                I'm glad you exist. Keep being you. 🌙
+            </p>
+        </section>
+
+        <!-- Kontrol musik -->
+        <button
+            class="music-button"
+            id="musicButton"
+            type="button"
+            aria-pressed="false"
+        >
+            ♫ music: off
+        </button>
+
+        <p class="footer">
+            made with a little thought & lots of stars
+        </p>
+
+    </main>
+
+    <!-- Musik opsional -->
+    <audio id="backgroundMusic" loop preload="none">
+        <source src="magnolia_WPL0Tpq5.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
